@@ -3,18 +3,13 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  // ✅ Allow CORS for browser requests
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // ✅ Handle preflight requests
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
 
   try {
-    // Parse the request body safely
     const body = await new Promise((resolve) => {
       let data = "";
       req.on("data", (chunk) => (data += chunk));
@@ -22,26 +17,18 @@ export default async function handler(req, res) {
     });
 
     const { prompt } = body;
-    if (!prompt) {
-      return res.status(400).json({ error: "Missing prompt" });
-    }
+    if (!prompt) return res.status(400).json({ error: "Missing prompt" });
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.GEMINI_API_KEY)
       return res.status(500).json({ error: "Missing GEMINI_API_KEY" });
-    }
 
-    // ✅ Call the Gemini API
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: `Generate a photo of ${prompt}` }],
-            },
-          ],
+          contents: [{ parts: [{ text: `Generate a photo of ${prompt}` }] }],
         }),
       }
     );

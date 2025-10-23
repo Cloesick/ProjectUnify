@@ -1,9 +1,9 @@
 export const config = {
-  runtime: 'nodejs', // Correct modern value
+  runtime: 'nodejs',
 };
 
 export default async function handler(req, res) {
-  // Enable CORS
+  // ✅ Enable CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           contents: [
             { parts: [{ text: `Generate a photo of ${prompt}` }] }
-          ],
+          ]
         }),
       }
     );

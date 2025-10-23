@@ -49,11 +49,9 @@ export async function POST(req) {
 
 function corsHeaders() {
   return {
-    "Access-Control-Allow-Origin": "https://cloesick.github.io",
+    "Access-Control-Allow-Origin": "https://cloesick.github.io", // ✅ only this
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-
   };
 }

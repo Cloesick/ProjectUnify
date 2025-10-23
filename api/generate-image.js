@@ -11,12 +11,18 @@ export default async function handler(req) {
     }
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=" +
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" +
         process.env.GEMINI_API_KEY,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ instances: [{ prompt }] }),
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: `Generate a photo of ${prompt}` }],
+            },
+          ],
+        }),
       }
     );
 

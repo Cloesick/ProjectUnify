@@ -3,9 +3,24 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  // Allow all origins (for testing)
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   try {
-    const body = req.body || (await new Response(req.body).json());
-    const { prompt } = body || {};
+    const body = req.body || (await new Promise(resolve => {
+      let data = "";
+      req.on("data", chunk => (data += chunk));
+      req.on("end", () => resolve(JSON.parse(data || "{}")));
+    }));
+
+    const { prompt } = body;
 
     if (!process.env.GEMINI_API_KEY) {
       return res.status(500).json({ error: "Missing GEMINI_API_KEY" });
@@ -20,7 +35,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: `Generate a realistic photo of ${prompt}` }],
+              parts: [{ text: `Generate a photo of ${prompt}` }],
             },
           ],
         }),

@@ -2,28 +2,26 @@ export const config = {
   runtime: 'edge',
 };
 
+// Handle CORS preflight
 export async function OPTIONS() {
   return new Response(null, {
     status: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    },
+    headers: corsHeaders(),
   });
 }
 
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const { prompt } = await request.json();
+    const { prompt } = await req.json();
 
     if (!prompt) {
       return new Response(JSON.stringify({ error: "Missing prompt" }), {
         status: 400,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        headers: corsHeaders(),
       });
     }
 
+    // 🔑 Use your OpenAI API securely
     const response = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: {
@@ -31,9 +29,9 @@ export async function POST(request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-image-1", // Or "dall-e-3"
+        model: "gpt-image-1",
         prompt,
-        size: "1024x1024"
+        size: "1024x1024",
       }),
     });
 
@@ -41,15 +39,22 @@ export async function POST(request) {
 
     return new Response(JSON.stringify(data), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: corsHeaders(),
     });
+
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      headers: corsHeaders(),
     });
   }
+}
+
+function corsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "https://cloesick.github.io", // 👈 Allow your GitHub Pages site
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Content-Type": "application/json",
+  };
 }

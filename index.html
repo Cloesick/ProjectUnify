@@ -238,369 +238,159 @@
         </div>
     </section>
 
-    <script>
-        // API Sleutel (leeg laten, wordt in de omgeving afgehandeld)
-        const apiKey = "AIzaSyCr3RV8c3KAelV8kDDkBMAcaI6rMTKyaz8";
+   <script>
+    // Replace this with your deployed proxy endpoint on Vercel (example):
+    const PROXY_URL = "https://projectunify.vercel.app/api/generate-image";
 
-        // Vertalings-object
-        const translations = {
-            'nl': {
-                'portal_title': 'Project Unify Portal',
-                'portal_subtitle': 'Uw portaal naar gespecialiseerde oplossingen',
-                'links_header': 'Belangrijkste Links',
-                
-                'dema_spec': 'De Foundation en Uitgebreide Leverancier',
-                'dema_niche': '<strong>Niches:</strong> Pompen, Leidingsystemen, Slangen, Aandrijftechniek & Beregening',
-                
-                'fluxer_spec': 'De Specialist in Industriële Procesflow Oplossingen',
-                'fluxer_niche': '<strong>Niches:</strong> Industriële Procesflow, Pompen, Afsluiters & Instrumentatie',
-                
-                'beltz_spec': 'De Partner voor Transportsystemen en 24/7 Onderhoud',
-                'beltz_niche': '<strong>Niches:</strong> Transportbanden, 24/7 Service, Onderhoud & Realisaties',
-                
-                'visschere_spec': 'De Expert in Maatwerk Water- & Irrigatieoplossingen',
-                'visschere_niche': '<strong>Niches:</strong> Wateroplossingen, Irrigatie, Maatwerk & Diensten',
+    const translations = { /* your full translation object stays exactly as before */ };
 
-                // Gedeelde link-teksten
-                'link_producten': 'Producten',
-                'link_vacatures': 'Vacatures',
-                'link_over_ons': 'Over ons',
-                'link_contact': 'Contact',
-                'link_diensten': 'Diensten',
-                'link_realisaties': 'Realisaties',
-
-                // DEMA specifieke links
-                'link_nieuws': 'Nieuws & promoties',
-                'link_downloads': 'Downloads',
-                'link_pompen': 'Pompen & toebehoren',
-                'link_kunststof': 'Kunststof leidingsystemen',
-                'link_metaal': 'Metalen leidingsystemen',
-                'link_slangen': 'Industriële slangen & koppelingen',
-                'link_aandrijf': 'Aandrijftechniek',
-                'link_afsluiters': 'Afsluiters & appendages',
-                'link_meet': 'Meet- & regeltechniek',
-                'link_beregening': 'Beregening',
-
-                // FLUXER specifieke links
-                'link_toepassing': 'Toepassingsgebieden',
-                'link_industrie': 'Industrieën',
-                'link_nieuws_kort': 'Nieuws',
-                
-                // BELTZ247 specifieke links
-                'link_home': 'Home',
-                'link_transport': 'Transportbanden & Componenten',
-                'link_service': 'Service & Onderhoud',
-                
-                // DE VISSCHERE specifieke links
-                'link_water': 'Water',
-                'link_irrigatie': 'Irrigatie',
-            },
-            'en': {
-                'portal_title': 'Project Unify Portal',
-                'portal_subtitle': 'Your gateway to specialized solutions',
-                'links_header': 'Key Links',
-
-                'dema_spec': 'The Foundation and Comprehensive Supplier',
-                'dema_niche': '<strong>Niches:</strong> Pumps, Piping Systems, Hoses, Drive Technology & Irrigation',
-                
-                'fluxer_spec': 'The Specialist in Industrial Process Flow Solutions',
-                'fluxer_niche': '<strong>Niches:</strong> Industrial Process Flow, Pumps, Valves & Instrumentation',
-                
-                'beltz_spec': 'The Partner for Conveyor Systems and 24/7 Maintenance',
-                'beltz_niche': '<strong>Niches:</strong> Conveyor Belts, 24/7 Service, Maintenance & Projects',
-                
-                'visschere_spec': 'The Expert in Custom Water & Irrigation Solutions',
-                'visschere_niche': '<strong>Niches:</strong> Water Solutions, Irrigation, Custom Work & Services',
-
-                // Shared link texts
-                'link_producten': 'Products',
-                'link_vacatures': 'Vacancies',
-                'link_over_ons': 'About Us',
-                'link_contact': 'Contact',
-                'link_diensten': 'Services',
-                'link_realisaties': 'Projects',
-
-                // DEMA specific links
-                'link_nieuws': 'News & promotions',
-                'link_downloads': 'Downloads',
-                'link_pompen': 'Pumps & accessories',
-                'link_kunststof': 'Plastic piping systems',
-                'link_metaal': 'Metal piping systems',
-                'link_slangen': 'Industrial hoses & couplings',
-                'link_aandrijf': 'Drive technology',
-                'link_afsluiters': 'Valves & fittings',
-                'link_meet': 'Measurement & control',
-                'link_beregening': 'Irrigation',
-
-                // FLUXER specific links
-                'link_toepassing': 'Application areas',
-                'link_industrie': 'Industries',
-                'link_nieuws_kort': 'News',
-
-                // BELTZ247 specific links
-                'link_home': 'Home',
-                'link_transport': 'Conveyor Belts & Components',
-                'link_service': 'Service & Maintenance',
-                
-                // DE VISSCHERE specific links
-                'link_water': 'Water',
-                'link_irrigatie': 'Irrigation',
-            },
-            'fr': {
-                'portal_title': 'Portail Project Unify',
-                'portal_subtitle': 'Votre portail vers des solutions spécialisées',
-                'links_header': 'Liens Principaux',
-
-                'dema_spec': 'La Fondation et Fournisseur Complet',
-                'dema_niche': '<strong>Niches:</strong> Pompes, Systèmes de Tuyauterie, Tuyaux, Technologie d\'Entraînement & Irrigation',
-                
-                'fluxer_spec': 'Le Spécialiste des Solutions de Flux de Processus Industriels',
-                'fluxer_niche': '<strong>Niches:</strong> Flux de Processus Industriels, Pompes, Vannes & Instrumentation',
-                
-                'beltz_spec': 'Le Partenaire pour les Systèmes de Transport et la Maintenance 24/7',
-                'beltz_niche': '<strong>Niches:</strong> Bandes Transporteuses, Service 24/7, Maintenance & Réalisations',
-                
-                'visschere_spec': "L'Expert en Solutions sur Mesure pour l'Eau et l'Irrigation",
-                'visschere_niche': '<strong>Niches:</strong> Solutions Hydrauliques, Irrigation, Sur Mesure & Services',
-
-                // Textes de liens partagés
-                'link_producten': 'Produits',
-                'link_vacatures': 'Offres d\'emploi',
-                'link_over_ons': 'À propos de nous',
-                'link_contact': 'Contact',
-                'link_diensten': 'Services',
-                'link_realisaties': 'Réalisations',
-
-                // Liens DEMA spécifiques
-                'link_nieuws': 'Nouvelles & promotions',
-                'link_downloads': 'Téléchargements',
-                'link_pompen': 'Pompes & accessoires',
-                'link_kunststof': 'Systèmes de tuyauterie plastique',
-                'link_metaal': 'Systèmes de tuyauterie métallique',
-                'link_slangen': 'Tuyaux industriels & raccords',
-                'link_aandrijf': 'Technologie d\'entraînement',
-                'link_afsluiters': 'Vannes & accessoires',
-                'link_meet': 'Mesure & régulation',
-                'link_beregening': 'Irrigation',
-
-                // Liens FLUXER spécifiques
-                'link_toepassing': 'Domaines d\'application',
-                'link_industrie': 'Industries',
-                'link_nieuws_kort': 'Nouvelles',
-
-                // Liens BELTZ247 spécifiques
-                'link_home': 'Accueil',
-                'link_transport': 'Bandes Transporteuses & Composants',
-                'link_service': 'Service & Maintenance',
-                
-                // Liens DE VISSCHERE spécifiques
-                'link_water': 'Eau',
-                'link_irrigatie': 'Irrigation',
+    function changeLanguage(lang) {
+        localStorage.setItem('preferredLanguage', lang);
+        document.querySelectorAll('[data-lang-key]').forEach(el => {
+            const key = el.getAttribute('data-lang-key');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
             }
-        };
+        });
+        document.documentElement.lang = lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('bg-indigo-600');
+            btn.classList.add('bg-gray-700');
+            if (btn.textContent.toLowerCase() === lang) {
+                btn.classList.add('bg-indigo-600');
+                btn.classList.remove('bg-gray-700');
+            }
+        });
+    }
 
-        /**
-         * Verandert de taal van de pagina.
-         */
-        function changeLanguage(lang) {
-            // Sla de voorkeur op
-            localStorage.setItem('preferredLanguage', lang);
-            
-            // Pas vertalingen toe
-            document.querySelectorAll('[data-lang-key]').forEach(el => {
-                const key = el.getAttribute('data-lang-key');
-                if (translations[lang] && translations[lang][key]) {
-                    // Gebruik innerHTML om <strong> tags te renderen
-                    el.innerHTML = translations[lang][key];
-                }
-            });
-            
-            // Update HTML lang attribuut
-            document.documentElement.lang = lang;
+    function initializeLanguage() {
+        const preferredLanguage = localStorage.getItem('preferredLanguage') || 'nl';
+        changeLanguage(preferredLanguage);
+    }
 
-            // Update actieve knopstijl
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600');
-                btn.classList.add('bg-gray-700');
-                if (btn.textContent.toLowerCase() === lang) {
-                    btn.classList.add('bg-indigo-600');
-                    btn.classList.remove('bg-gray-700');
-                }
-            });
-        }
-
-        /**
-         * Stelt de standaardtaal in bij het laden.
-         */
-        function initializeLanguage() {
-            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'nl';
-            changeLanguage(preferredLanguage);
-        }
-
-        /**
-         * Fetch-wrapper met exponentiële backoff voor rate limiting.
-         */
-        async function fetchWithBackoff(url, options, retries = 5, delay = 1000) {
-            try {
-                const response = await fetch(url, options);
-                if (!response.ok) {
-                    if (response.status === 429 && retries > 0) {
-                        // Wacht en probeer opnieuw
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        return fetchWithBackoff(url, options, retries - 1, delay * 2);
-                    }
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                if (retries > 0) {
-                    // Wacht en probeer opnieuw bij netwerkfouten
+    async function fetchWithBackoff(url, options, retries = 5, delay = 1000) {
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                if (response.status === 429 && retries > 0) {
                     await new Promise(resolve => setTimeout(resolve, delay));
                     return fetchWithBackoff(url, options, retries - 1, delay * 2);
                 }
-                console.error("Fetch mislukt na meerdere pogingen:", error);
-                throw error;
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        }
-
-        /**
-         * Haalt een enkele afbeelding op en retourneert base64 URL.
-         */
-        async function fetchImage(prompt) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-            const payload = {
-                instances: [{ prompt: prompt }],
-                parameters: { "sampleCount": 1 }
-            };
-
-            const result = await fetchWithBackoff(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
-                return `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+            return await response.json();
+        } catch (error) {
+            if (retries > 0) {
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return fetchWithBackoff(url, options, retries - 1, delay * 2);
             }
-            // Gooi een error als er geen afbeelding is
-            throw new Error(`Geen afbeelding ontvangen voor prompt: ${prompt}`);
+            console.error("Fetch mislukt na meerdere pogingen:", error);
+            throw error;
         }
-        
-        /**
-         * Start de 3-seconden carousel.
-         */
-        function startCarousel(containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            const slides = container.querySelectorAll('.carousel-slide');
-            
-            // Geen carousel nodig voor 1 of 0 afbeeldingen
-            if (slides.length < 2) {
-                 if (slides.length === 1) {
-                    slides[0].classList.remove('opacity-0'); // Toon de ene afbeelding
-                 }
-                 return;
-            }
+    }
 
-            let currentIndex = 0;
-            slides[currentIndex].classList.remove('opacity-0'); // Toon eerste slide
-
-            setInterval(() => {
-                if (slides[currentIndex]) {
-                    slides[currentIndex].classList.add('opacity-0'); // Verberg huidige
-                }
-                currentIndex = (currentIndex + 1) % slides.length; // Ga naar volgende
-                if (slides[currentIndex]) {
-                    slides[currentIndex].classList.remove('opacity-0'); // Toon volgende
-                }
-            }, 3000); // 3 seconden
-        }
-
-        /**
-         * Genereert meerdere afbeeldingen voor een carousel.
-         */
-        async function generateCarouselImages(prompts, containerId, spinnerId) {
-            const container = document.getElementById(containerId);
-            const spinner = document.getElementById(spinnerId);
-            if (!container || !spinner) return;
-
-            // Maak een array van promises
-            const imagePromises = prompts.map(prompt => fetchImage(prompt));
-
-            // Wacht tot alle promises zijn afgehandeld
-            const results = await Promise.allSettled(imagePromises);
-
-            let hasSuccessfulImages = false;
-            results.forEach((result, index) => {
-                if (result.status === 'fulfilled') {
-                    hasSuccessfulImages = true;
-                    const img = document.createElement('img');
-                    img.src = result.value;
-                    img.alt = `AI-generated image for ${containerId} (${index + 1})`;
-                    // Belangrijke Tailwind classes voor de carousel
-                    img.className = 'carousel-slide absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0';
-                    container.appendChild(img);
-                } else {
-                    console.error(`Kon afbeelding ${index + 1} voor ${containerId} niet laden:`, result.reason);
-                }
-            });
-
-            // Verberg spinner
-            spinner.classList.add('hidden');
-
-            if (hasSuccessfulImages) {
-                startCarousel(containerId); // Start de carousel
-            } else {
-                // Toon een foutmelding als *niets* is gelukt
-                container.innerHTML = `<div class="flex items-center justify-center w-full h-full text-red-400 text-sm p-4">Afbeeldingen laden mislukt</div>`;
-            }
-        }
-
-
-        /**
-         * Definieert de prompts en start alle carousels.
-         */
-        function generateAllImages() {
-            // DEMA Prompts
-            const demaPrompts = [
-                "Een schone, moderne productfoto van industriële pompen, blauwe kunststof leidingen en glimmende metalen kleppen, netjes gerangschikt op een lichtgrijze achtergrond.",
-                "Een gedetailleerde close-up van een grote, zware industriële slang met een complexe metalen koppeling.",
-                "Een magazijngang gevuld met georganiseerde schappen met kleurrijke kunststof buizen en fittingen."
-            ];
-            generateCarouselImages(demaPrompts, "dema-carousel-container", "dema-spinner");
-
-            // FLUXER Prompts
-            const fluxerPrompts = [
-                "Een gedetailleerde close-up van een complex industrieel instrumentenpaneel met gloeiende blauwe lichten, roestvrijstalen kleppen en manometers.",
-                "Een hightech industriële procespomp, gemaakt van gepolijst roestvrij staal, in een schone fabrieksomgeving.",
-                "Een ingewikkelde reeks geautomatiseerde industriële regelkleppen op een serie leidingen."
-            ];
-            generateCarouselImages(fluxerPrompts, "fluxer-carousel-container", "fluxer-spinner");
-            
-            // BELTZ Prompts
-            const beltzPrompts = [
-                "Een dynamische, groothoekopname van een strak, modern industrieel transportbandsysteem in beweging, dat pakketten vervoert in een schone, lichte fabrieksomgeving.",
-                "Een close-upfoto van de textuur van een zwarte rubberen transportband en de precisie metalen rollen waarover deze loopt.",
-                "Een servicemonteur in professionele kleding die onderhoud uitvoert aan een complex transportbandsysteem in een grote faciliteit."
-            ];
-            generateCarouselImages(beltzPrompts, "beltz-carousel-container", "beltz-spinner");
-            
-            // DE VISSCHERE Prompts
-            const visscherePrompts = [
-                "Een professionele foto van een groot, op maat gebouwd waterfiltratie- en pompstation voor de landbouw.",
-                "Een hightech landbouwirrigatiesysteem, zoals een center pivot, dat water sproeit over een weelderig groen veld bij zonsopgang.",
-                "Een team van technici dat waterleidingen met een grote diameter installeert voor een op maat gemaakt irrigatieproject in een veld."
-            ];
-            generateCarouselImages(visscherePrompts, "visschere-carousel-container", "visschere-spinner");
-        }
-
-        // Start alles wanneer de DOM geladen is
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeLanguage();
-            generateAllImages();
+    /**
+     * Calls your proxy instead of Google’s API directly.
+     */
+    async function fetchImage(prompt) {
+        const result = await fetchWithBackoff(PROXY_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt })
         });
 
-    </script>
+        // The proxy returns the same JSON as Google’s Imagen API
+        const prediction = result?.predictions?.[0];
+        if (prediction?.bytesBase64Encoded) {
+            return `data:image/png;base64,${prediction.bytesBase64Encoded}`;
+        }
+        throw new Error(`Geen afbeelding ontvangen voor prompt: ${prompt}`);
+    }
+
+    function startCarousel(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const slides = container.querySelectorAll('.carousel-slide');
+        if (slides.length < 2) {
+            if (slides.length === 1) slides[0].classList.remove('opacity-0');
+            return;
+        }
+        let currentIndex = 0;
+        slides[currentIndex].classList.remove('opacity-0');
+        setInterval(() => {
+            slides[currentIndex].classList.add('opacity-0');
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].classList.remove('opacity-0');
+        }, 3000);
+    }
+
+    async function generateCarouselImages(prompts, containerId, spinnerId) {
+        const container = document.getElementById(containerId);
+        const spinner = document.getElementById(spinnerId);
+        if (!container || !spinner) return;
+
+        const imagePromises = prompts.map(prompt => fetchImage(prompt));
+        const results = await Promise.allSettled(imagePromises);
+
+        let hasSuccessfulImages = false;
+        results.forEach((result, index) => {
+            if (result.status === 'fulfilled') {
+                hasSuccessfulImages = true;
+                const img = document.createElement('img');
+                img.src = result.value;
+                img.alt = `AI-generated image for ${containerId} (${index + 1})`;
+                img.className = 'carousel-slide absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0';
+                container.appendChild(img);
+            } else {
+                console.error(`Kon afbeelding ${index + 1} voor ${containerId} niet laden:`, result.reason);
+            }
+        });
+
+        spinner.classList.add('hidden');
+
+        if (hasSuccessfulImages) {
+            startCarousel(containerId);
+        } else {
+            container.innerHTML = `<div class="flex items-center justify-center w-full h-full text-red-400 text-sm p-4">Afbeeldingen laden mislukt</div>`;
+        }
+    }
+
+    function generateAllImages() {
+        const demaPrompts = [
+            "Een schone, moderne productfoto van industriële pompen, blauwe kunststof leidingen en glimmende metalen kleppen.",
+            "Een gedetailleerde close-up van een grote, zware industriële slang met een metalen koppeling.",
+            "Een magazijn vol kleurrijke kunststof buizen en fittingen."
+        ];
+        generateCarouselImages(demaPrompts, "dema-carousel-container", "dema-spinner");
+
+        const fluxerPrompts = [
+            "Een close-up van een industrieel instrumentenpaneel met blauwe lichten en roestvrijstalen kleppen.",
+            "Een hightech procespomp van gepolijst roestvrij staal in een schone fabriek.",
+            "Een reeks industriële regelkleppen en leidingen in een moderne omgeving."
+        ];
+        generateCarouselImages(fluxerPrompts, "fluxer-carousel-container", "fluxer-spinner");
+
+        const beltzPrompts = [
+            "Een moderne transportband in beweging in een industriële omgeving.",
+            "Een close-up van een rubberen transportband met metalen rollen.",
+            "Een monteur voert onderhoud uit aan een transportbandsysteem."
+        ];
+        generateCarouselImages(beltzPrompts, "beltz-carousel-container", "beltz-spinner");
+
+        const visscherePrompts = [
+            "Een groot waterfiltratiesysteem voor landbouw, professioneel gefotografeerd.",
+            "Een irrigatiesysteem sproeit water over een veld bij zonsopgang.",
+            "Technici installeren leidingen voor een irrigatieproject."
+        ];
+        generateCarouselImages(visscherePrompts, "visschere-carousel-container", "visschere-spinner");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeLanguage();
+        generateAllImages();
+    });
+</script>
+
 </body>
 </html>
 

@@ -53,5 +53,7 @@ function corsHeaders() {
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+
   };
 }

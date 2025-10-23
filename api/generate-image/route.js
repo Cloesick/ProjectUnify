@@ -1,25 +1,34 @@
 export const config = { runtime: "edge" };
 
-// Handle preflight CORS
-export async function OPTIONS() {
-  return new Response(null, {
-    status: 204,
-    headers: corsHeaders(),
-  });
-}
+export default async function handler(req) {
+  const origin = req.headers.get("origin") || "";
 
-export async function POST(req) {
+  // ✅ Preflight check
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders(origin),
+    });
+  }
+
+  if (req.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: corsHeaders(origin),
+    });
+  }
+
   try {
     const { prompt } = await req.json();
 
     if (!prompt) {
       return new Response(JSON.stringify({ error: "Missing prompt" }), {
         status: 400,
-        headers: corsHeaders(),
+        headers: corsHeaders(origin),
       });
     }
 
-    // Example using OpenAI API
+    // ✅ Call OpenAI API
     const response = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: {
@@ -37,21 +46,30 @@ export async function POST(req) {
 
     return new Response(JSON.stringify(data), {
       status: 200,
-      headers: corsHeaders(),
+      headers: corsHeaders(origin),
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
-      headers: corsHeaders(),
+      headers: corsHeaders(origin),
     });
   }
 }
 
-function corsHeaders() {
+function corsHeaders(origin) {
+  const allowedOrigins = [
+    "https://cloesick.github.io",
+    "http://localhost:3000",  // for local dev
+  ];
+
+  const allowed =
+    allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+
   return {
-    "Access-Control-Allow-Origin": "https://cloesick.github.io", // ✅ only this
+    "Access-Control-Allow-Origin": allowed,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Credentials": "true",
     "Content-Type": "application/json",
   };
 }

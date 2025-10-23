@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Unify Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Basisstijl voor het Inter-lettertype */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Aangepaste stijlen voor de laad-spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Stijlen voor de carousel */
+        .carousel-slide {
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-6 md:p-12">
+
+    <header class="mb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <!-- Titel -->
+            <div>
+                <h1 class="text-4xl font-extrabold" data-lang-key="portal_title">Project Unify Portal</h1>
+                <p class="text-lg text-gray-400" data-lang-key="portal_subtitle">Uw portaal naar gespecialiseerde oplossingen</p>
+            </div>
+            
+            <!-- Taalwisselaar -->
+            <div class="flex space-x-2 bg-gray-800 p-2 rounded-lg">
+                <button onclick="changeLanguage('nl')" class="lang-btn active:bg-indigo-600 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition-all duration-200">NL</button>
+                <button onclick="changeLanguage('en')" class="lang-btn active:bg-indigo-600 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition-all duration-200">EN</button>
+                <button onclick="changeLanguage('fr')" class="lang-btn active:bg-indigo-600 bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition-all duration-200">FR</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Uitgebreid Navigatie Raster -->
+    <section id="exhaustive-portal">
+        <!-- 1-koloms layout op mobiel (default), 4-koloms vanaf 'lg' (pc) -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-6">
+            
+            <!-- Kaart 1: DEMA -->
+            <div class="bg-gray-800 rounded-xl shadow-lg flex flex-col transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-indigo-500/30 overflow-hidden">
+                <!-- KLIKBARE WRAPPER (HEADER + AFBEELDING + INFO) -->
+                <a href="https://www.demashop.be/" target="_blank" rel="noopener noreferrer" class="block group">
+                    <!-- DEMA Kaart Header -->
+                    <div class="bg-indigo-600 p-6 group-hover:bg-indigo-700 transition-colors duration-300">
+                        <h2 class="text-4xl font-extrabold text-white tracking-tight">DEMA</h2>
+                    </div>
+                    
+                    <!-- AI Afbeeldingscarrousel Container -->
+                    <div id="dema-carousel-container" class="aspect-video bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                        <!-- Spinner -->
+                        <div id="dema-spinner" class="spinner w-12 h-12 border-4 border-indigo-300 border-t-transparent rounded-full absolute"></div>
+                        <!-- Afbeeldingen worden hier door JS ingevoegd -->
+                    </div>
+
+                    <!-- DEMA Kaart Inhoud (BOVENSTE DEEL) -->
+                    <div class="p-6 md:p-8 group-hover:bg-gray-700/50 transition-colors duration-300">
+                        <p class="text-gray-300 mb-4" data-lang-key="dema_spec">De Foundation en Uitgebreide Leverancier</p>
+                        <p class="text-sm text-gray-400 mb-6" data-lang-key="dema_niche">
+                            <strong>Niches:</strong> Pompen, Leidingsystemen, Slangen, Aandrijftechniek & Beregening
+                        </p>
+                    </div>
+                </a> <!-- EINDE KLIKBARE WRAPPER -->
+
+                <!-- DEMA Kaart Inhoud (ONDERSTE DEEL - DE LINKS) -->
+                <div class="p-6 md:p-8 pt-0">
+                    <hr class="border-gray-700 my-6">
+                    <h3 class="text-xl font-semibold text-white mb-4" data-lang-key="links_header">Belangrijkste Links</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <!-- Links worden hier ingevoegd -->
+                        <a href="https://www.demashop.be/nl/producten/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_producten">Producten</a>
+                        <a href="https://www.demashop.be/nl/nieuws-promoties/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_nieuws">Nieuws & promoties</a>
+                        <a href="https://www.demashop.be/nl/downloads/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_downloads">Downloads</a>
+                        <a href="https://www.demashop.be/nl/vacatures/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_vacatures">Vacatures</a>
+                        <a href="https://www.demashop.be/nl/over-ons/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_over_ons">Over ons</a>
+                        <a href="https://www.demashop.be/nl/contact/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_contact">Contact</a>
+                        <a href="https://www.demashop.be/nl/producten/pompen-toebehoren/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_pompen">Pompen & toebehoren</a>
+                        <a href="https://www.demashop.be/nl/producten/kunststof-leidingsystemen/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_kunststof">Kunststof leidingsystemen</a>
+                        <a href="https://www.demashop.be/nl/producten/metalen-leidingsystemen/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_metaal">Metalen leidingsystemen</a>
+                        <a href="https://www.demashop.be/nl/producten/industriele-slangen-koppelingen/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_slangen">Industriële slangen & koppelingen</a>
+                        <a href="https://www.demashop.be/nl/producten/aandrijftechniek/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_aandrijf">Aandrijftechniek</a>
+                        <a href="https://www.demashop.be/nl/producten/afsluiters-appendages/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_afsluiters">Afsluiters & appendages</a>
+                        <a href="https://www.demashop.be/nl/producten/meet-regeltechniek/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_meet">Meet- & regeltechniek</a>
+                        <a href="https://www.demashop.be/nl/producten/beregening-land-tuinbouw/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-200" data-lang-key="link_beregening">Beregening</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kaart 2: FLUXER -->
+            <div class="bg-gray-800 rounded-xl shadow-lg flex flex-col transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-blue-500/30 overflow-hidden">
+                <!-- KLIKBARE WRAPPER -->
+                <a href="https://www.fluxer.be/" target="_blank" rel="noopener noreferrer" class="block group">
+                    <!-- FLUXER Kaart Header -->
+                    <div class="bg-blue-600 p-6 group-hover:bg-blue-700 transition-colors duration-300">
+                        <h2 class="text-4xl font-extrabold text-white tracking-tight">FLUXER</h2>
+                    </div>
+                    
+                    <!-- AI Afbeeldingscarrousel Container -->
+                    <div id="fluxer-carousel-container" class="aspect-video bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                        <!-- Spinner -->
+                        <div id="fluxer-spinner" class="spinner w-12 h-12 border-4 border-blue-300 border-t-transparent rounded-full absolute"></div>
+                        <!-- Afbeeldingen worden hier door JS ingevoegd -->
+                    </div>
+
+                    <!-- FLUXER Kaart Inhoud (BOVENSTE DEEL) -->
+                    <div class="p-6 md:p-8 group-hover:bg-gray-700/50 transition-colors duration-300">
+                        <p class="text-gray-300 mb-4" data-lang-key="fluxer_spec">De Specialist in Industriële Procesflow Oplossingen</p>
+                        <p class="text-sm text-gray-400 mb-6" data-lang-key="fluxer_niche">
+                            <strong>Niches:</strong> Industriële Procesflow, Pompen, Afsluiters & Instrumentatie
+                        </p>
+                    </div>
+                </a> <!-- EINDE KLIKBARE WRAPPER -->
+                
+                <!-- FLUXER Kaart Inhoud (ONDERSTE DEEL - DE LINKS) -->
+                <div class="p-6 md:p-8 pt-0">
+                    <hr class="border-gray-700 my-6">
+                    <h3 class="text-xl font-semibold text-white mb-4" data-lang-key="links_header">Belangrijkste Links</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <!-- Links worden hier ingevoegd -->
+                        <a href="https://www.fluxer.be/nl/toepassingsgebieden/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_toepassing">Toepassingsgebieden</a>
+                        <a href="https://www.fluxer.be/nl/diensten/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_diensten">Diensten</a>
+                        <a href="https://www.fluxer.be/nl/producten/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_producten">Producten</a>
+                        <a href="https://www.fluxer.be/nl/industrieen/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_industrie">Industrieën</a>
+                        <a href="https://www.fluxer.be/nl/over-ons/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_over_ons">Over ons</a>
+                        <a href="https://www.fluxer.be/nl/vacatures/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_vacatures">Vacatures</a>
+                        <a href="https://www.fluxer.be/nl/contact/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_contact">Contact</a>
+                        <a href="https://www.fluxer.be/nl/nieuws/" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-200" data-lang-key="link_nieuws_kort">Nieuws</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kaart 3: BELTZ247 -->
+            <div class="bg-gray-800 rounded-xl shadow-lg flex flex-col transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-green-500/30 overflow-hidden">
+                <!-- KLIKBARE WRAPPER -->
+                <a href="https://beltz247.com/" target="_blank" rel="noopener noreferrer" class="block group">
+                    <!-- BELTZ247 Kaart Header -->
+                    <div class="bg-green-600 p-6 group-hover:bg-green-700 transition-colors duration-300">
+                        <h2 class="text-4xl font-extrabold text-white tracking-tight">BELTZ<span class="text-green-200">247</span></h2>
+                    </div>
+                    
+                    <!-- AI Afbeeldingscarrousel Container -->
+                    <div id="beltz-carousel-container" class="aspect-video bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                        <!-- Spinner -->
+                        <div id="beltz-spinner" class="spinner w-12 h-12 border-4 border-green-300 border-t-transparent rounded-full absolute"></div>
+                        <!-- Afbeeldingen worden hier door JS ingevoegd -->
+                    </div>
+
+                    <!-- BELTZ247 Kaart Inhoud (BOVENSTE DEEL) -->
+                    <div class="p-6 md:p-8 group-hover:bg-gray-700/50 transition-colors duration-300">
+                        <p class="text-gray-300 mb-4" data-lang-key="beltz_spec">De Partner voor Transportsystemen en 24/7 Onderhoud</p>
+                        <p class="text-sm text-gray-400 mb-6" data-lang-key="beltz_niche">
+                            <strong>Niches:</strong> Transportbanden, 24/7 Service, Onderhoud & Realisaties
+                        </p>
+                    </div>
+                </a> <!-- EINDE KLIKBARE WRAPPER -->
+
+                <!-- BELTZ247 Kaart Inhoud (ONDERSTE DEEL - DE LINKS) -->
+                <div class="p-6 md:p-8 pt-0">
+                    <hr class="border-gray-700 my-6">
+                    <h3 class="text-xl font-semibold text-white mb-4" data-lang-key="links_header">Belangrijkste Links</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <!-- Links worden hier ingevoegd -->
+                        <a href="https://beltz247.com/nl" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_home">Home</a>
+                        <a href="https://beltz247.com/nl/transportbanden-componenten" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_transport">Transportbanden & Componenten</a>
+                        <a href="https://beltz247.com/nl/service-onderhoud" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_service">Service & Onderhoud</a>
+                        <a href="https://beltz247.com/nl/realisaties" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_realisaties">Realisaties</a>
+                        <a href="https://beltz247.com/nl/over-beltz247" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_over_ons">Over Beltz247</a>
+                        <a href="https://beltz247.com/nl/vacatures" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_vacatures">Vacatures</a>
+                        <a href="https://beltz247.com/nl/contact" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-all duration-200" data-lang-key="link_contact">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kaart 4: Devisschere Tech -->
+            <div class="bg-gray-800 rounded-xl shadow-lg flex flex-col transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-teal-500/30 overflow-hidden">
+                <!-- KLIKBARE WRAPPER -->
+                <a href="https://www.devisscheretechnics.be/" target="_blank" rel="noopener noreferrer" class="block group">
+                    <!-- DE VISSCHERE TECHNICS Kaart Header (Aangepast) -->
+                    <div class="bg-teal-600 p-6 group-hover:bg-teal-700 transition-colors duration-300">
+                        <!-- Aangepaste titel: ingekort en text-4xl -->
+                        <h2 class="text-4xl font-extrabold text-white tracking-tight">Devisschere Tech</h2>
+                    </div>
+                    
+                    <!-- AI Afbeeldingscarrousel Container -->
+                    <div id="visschere-carousel-container" class="aspect-video bg-gray-700 flex items-center justify-center relative overflow-hidden">
+                        <!-- Spinner -->
+                        <div id="visschere-spinner" class="spinner w-12 h-12 border-4 border-teal-300 border-t-transparent rounded-full absolute"></div>
+                        <!-- Afbeeldingen worden hier door JS ingevoegd -->
+                    </div>
+
+                    <!-- DE VISSCHERE TECHNICS Kaart Inhoud (BOVENSTE DEEL) -->
+                    <div class="p-6 md:p-8 group-hover:bg-gray-700/50 transition-colors duration-300">
+                        <p class="text-gray-300 mb-4" data-lang-key="visschere_spec">De Expert in Maatwerk Water- & Irrigatieoplossingen</p>
+                        <p class="text-sm text-gray-400 mb-6" data-lang-key="visschere_niche">
+                            <strong>Niches:</strong> Wateroplossingen, Irrigatie, Maatwerk & Diensten
+                        </p>
+                    </div>
+                </a> <!-- EINDE KLIKBARE WRAPPER -->
+
+                <!-- DE VISSCHERE TECHNICS Kaart Inhoud (ONDERSTE DEEL - DE LINKS) -->
+                <div class="p-6 md:p-8 pt-0">
+                    <hr class="border-gray-700 my-6">
+                    <h3 class="text-xl font-semibold text-white mb-4" data-lang-key="links_header">Belangrijkste Links</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <!-- Links worden hier ingevoegd -->
+                        <a href="https://www.devisscheretechnics.be/nl/water" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-200" data-lang-key="link_water">Water</a>
+                        <a href="https://www.devisscheretechnics.be/nl/irrigatie" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-200" data-lang-key="link_irrigatie">Irrigatie</a>
+                        <a href="https://www.devisscheretechnics.be/nl/diensten" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-200" data-lang-key="link_diensten">Diensten</a>
+                        <a href="https://www.devisscheretechnics.be/nl/realisaties" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-200" data-lang-key="link_realisaties">Realisaties</a>
+                        <a href="https://www.devisscheretechnics.be/nl/over-ons" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-200" data-lang-key="link_over_ons">Over ons</a>
+                        <a href="https://www.devisscheretechnics.be/nl/contact" target="_blank" rel="noopener noreferrer" class="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-full hover:bg-teal-600 hover:text-white transition-all duration-200" data-lang-key="link_contact">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // API Sleutel (leeg laten, wordt in de omgeving afgehandeld)
+        const apiKey = "";
+
+        // Vertalings-object
+        const translations = {
+            'nl': {
+                'portal_title': 'Project Unify Portal',
+                'portal_subtitle': 'Uw portaal naar gespecialiseerde oplossingen',
+                'links_header': 'Belangrijkste Links',
+                
+                'dema_spec': 'De Foundation en Uitgebreide Leverancier',
+                'dema_niche': '<strong>Niches:</strong> Pompen, Leidingsystemen, Slangen, Aandrijftechniek & Beregening',
+                
+                'fluxer_spec': 'De Specialist in Industriële Procesflow Oplossingen',
+                'fluxer_niche': '<strong>Niches:</strong> Industriële Procesflow, Pompen, Afsluiters & Instrumentatie',
+                
+                'beltz_spec': 'De Partner voor Transportsystemen en 24/7 Onderhoud',
+                'beltz_niche': '<strong>Niches:</strong> Transportbanden, 24/7 Service, Onderhoud & Realisaties',
+                
+                'visschere_spec': 'De Expert in Maatwerk Water- & Irrigatieoplossingen',
+                'visschere_niche': '<strong>Niches:</strong> Wateroplossingen, Irrigatie, Maatwerk & Diensten',
+
+                // Gedeelde link-teksten
+                'link_producten': 'Producten',
+                'link_vacatures': 'Vacatures',
+                'link_over_ons': 'Over ons',
+                'link_contact': 'Contact',
+                'link_diensten': 'Diensten',
+                'link_realisaties': 'Realisaties',
+
+                // DEMA specifieke links
+                'link_nieuws': 'Nieuws & promoties',
+                'link_downloads': 'Downloads',
+                'link_pompen': 'Pompen & toebehoren',
+                'link_kunststof': 'Kunststof leidingsystemen',
+                'link_metaal': 'Metalen leidingsystemen',
+                'link_slangen': 'Industriële slangen & koppelingen',
+                'link_aandrijf': 'Aandrijftechniek',
+                'link_afsluiters': 'Afsluiters & appendages',
+                'link_meet': 'Meet- & regeltechniek',
+                'link_beregening': 'Beregening',
+
+                // FLUXER specifieke links
+                'link_toepassing': 'Toepassingsgebieden',
+                'link_industrie': 'Industrieën',
+                'link_nieuws_kort': 'Nieuws',
+                
+                // BELTZ247 specifieke links
+                'link_home': 'Home',
+                'link_transport': 'Transportbanden & Componenten',
+                'link_service': 'Service & Onderhoud',
+                
+                // DE VISSCHERE specifieke links
+                'link_water': 'Water',
+                'link_irrigatie': 'Irrigatie',
+            },
+            'en': {
+                'portal_title': 'Project Unify Portal',
+                'portal_subtitle': 'Your gateway to specialized solutions',
+                'links_header': 'Key Links',
+
+                'dema_spec': 'The Foundation and Comprehensive Supplier',
+                'dema_niche': '<strong>Niches:</strong> Pumps, Piping Systems, Hoses, Drive Technology & Irrigation',
+                
+                'fluxer_spec': 'The Specialist in Industrial Process Flow Solutions',
+                'fluxer_niche': '<strong>Niches:</strong> Industrial Process Flow, Pumps, Valves & Instrumentation',
+                
+                'beltz_spec': 'The Partner for Conveyor Systems and 24/7 Maintenance',
+                'beltz_niche': '<strong>Niches:</strong> Conveyor Belts, 24/7 Service, Maintenance & Projects',
+                
+                'visschere_spec': 'The Expert in Custom Water & Irrigation Solutions',
+                'visschere_niche': '<strong>Niches:</strong> Water Solutions, Irrigation, Custom Work & Services',
+
+                // Shared link texts
+                'link_producten': 'Products',
+                'link_vacatures': 'Vacancies',
+                'link_over_ons': 'About Us',
+                'link_contact': 'Contact',
+                'link_diensten': 'Services',
+                'link_realisaties': 'Projects',
+
+                // DEMA specific links
+                'link_nieuws': 'News & promotions',
+                'link_downloads': 'Downloads',
+                'link_pompen': 'Pumps & accessories',
+                'link_kunststof': 'Plastic piping systems',
+                'link_metaal': 'Metal piping systems',
+                'link_slangen': 'Industrial hoses & couplings',
+                'link_aandrijf': 'Drive technology',
+                'link_afsluiters': 'Valves & fittings',
+                'link_meet': 'Measurement & control',
+                'link_beregening': 'Irrigation',
+
+                // FLUXER specific links
+                'link_toepassing': 'Application areas',
+                'link_industrie': 'Industries',
+                'link_nieuws_kort': 'News',
+
+                // BELTZ247 specific links
+                'link_home': 'Home',
+                'link_transport': 'Conveyor Belts & Components',
+                'link_service': 'Service & Maintenance',
+                
+                // DE VISSCHERE specific links
+                'link_water': 'Water',
+                'link_irrigatie': 'Irrigation',
+            },
+            'fr': {
+                'portal_title': 'Portail Project Unify',
+                'portal_subtitle': 'Votre portail vers des solutions spécialisées',
+                'links_header': 'Liens Principaux',
+
+                'dema_spec': 'La Fondation et Fournisseur Complet',
+                'dema_niche': '<strong>Niches:</strong> Pompes, Systèmes de Tuyauterie, Tuyaux, Technologie d\'Entraînement & Irrigation',
+                
+                'fluxer_spec': 'Le Spécialiste des Solutions de Flux de Processus Industriels',
+                'fluxer_niche': '<strong>Niches:</strong> Flux de Processus Industriels, Pompes, Vannes & Instrumentation',
+                
+                'beltz_spec': 'Le Partenaire pour les Systèmes de Transport et la Maintenance 24/7',
+                'beltz_niche': '<strong>Niches:</strong> Bandes Transporteuses, Service 24/7, Maintenance & Réalisations',
+                
+                'visschere_spec': "L'Expert en Solutions sur Mesure pour l'Eau et l'Irrigation",
+                'visschere_niche': '<strong>Niches:</strong> Solutions Hydrauliques, Irrigation, Sur Mesure & Services',
+
+                // Textes de liens partagés
+                'link_producten': 'Produits',
+                'link_vacatures': 'Offres d\'emploi',
+                'link_over_ons': 'À propos de nous',
+                'link_contact': 'Contact',
+                'link_diensten': 'Services',
+                'link_realisaties': 'Réalisations',
+
+                // Liens DEMA spécifiques
+                'link_nieuws': 'Nouvelles & promotions',
+                'link_downloads': 'Téléchargements',
+                'link_pompen': 'Pompes & accessoires',
+                'link_kunststof': 'Systèmes de tuyauterie plastique',
+                'link_metaal': 'Systèmes de tuyauterie métallique',
+                'link_slangen': 'Tuyaux industriels & raccords',
+                'link_aandrijf': 'Technologie d\'entraînement',
+                'link_afsluiters': 'Vannes & accessoires',
+                'link_meet': 'Mesure & régulation',
+                'link_beregening': 'Irrigation',
+
+                // Liens FLUXER spécifiques
+                'link_toepassing': 'Domaines d\'application',
+                'link_industrie': 'Industries',
+                'link_nieuws_kort': 'Nouvelles',
+
+                // Liens BELTZ247 spécifiques
+                'link_home': 'Accueil',
+                'link_transport': 'Bandes Transporteuses & Composants',
+                'link_service': 'Service & Maintenance',
+                
+                // Liens DE VISSCHERE spécifiques
+                'link_water': 'Eau',
+                'link_irrigatie': 'Irrigation',
+            }
+        };
+
+        /**
+         * Verandert de taal van de pagina.
+         */
+        function changeLanguage(lang) {
+            // Sla de voorkeur op
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Pas vertalingen toe
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    // Gebruik innerHTML om <strong> tags te renderen
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Update HTML lang attribuut
+            document.documentElement.lang = lang;
+
+            // Update actieve knopstijl
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600');
+                btn.classList.add('bg-gray-700');
+                if (btn.textContent.toLowerCase() === lang) {
+                    btn.classList.add('bg-indigo-600');
+                    btn.classList.remove('bg-gray-700');
+                }
+            });
+        }
+
+        /**
+         * Stelt de standaardtaal in bij het laden.
+         */
+        function initializeLanguage() {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'nl';
+            changeLanguage(preferredLanguage);
+        }
+
+        /**
+         * Fetch-wrapper met exponentiële backoff voor rate limiting.
+         */
+        async function fetchWithBackoff(url, options, retries = 5, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    if (response.status === 429 && retries > 0) {
+                        // Wacht en probeer opnieuw
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                if (retries > 0) {
+                    // Wacht en probeer opnieuw bij netwerkfouten
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                console.error("Fetch mislukt na meerdere pogingen:", error);
+                throw error;
+            }
+        }
+
+        /**
+         * Haalt een enkele afbeelding op en retourneert base64 URL.
+         */
+        async function fetchImage(prompt) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+            const payload = {
+                instances: [{ prompt: prompt }],
+                parameters: { "sampleCount": 1 }
+            };
+
+            const result = await fetchWithBackoff(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                return `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+            }
+            // Gooi een error als er geen afbeelding is
+            throw new Error(`Geen afbeelding ontvangen voor prompt: ${prompt}`);
+        }
+        
+        /**
+         * Start de 3-seconden carousel.
+         */
+        function startCarousel(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const slides = container.querySelectorAll('.carousel-slide');
+            
+            // Geen carousel nodig voor 1 of 0 afbeeldingen
+            if (slides.length < 2) {
+                 if (slides.length === 1) {
+                    slides[0].classList.remove('opacity-0'); // Toon de ene afbeelding
+                 }
+                 return;
+            }
+
+            let currentIndex = 0;
+            slides[currentIndex].classList.remove('opacity-0'); // Toon eerste slide
+
+            setInterval(() => {
+                if (slides[currentIndex]) {
+                    slides[currentIndex].classList.add('opacity-0'); // Verberg huidige
+                }
+                currentIndex = (currentIndex + 1) % slides.length; // Ga naar volgende
+                if (slides[currentIndex]) {
+                    slides[currentIndex].classList.remove('opacity-0'); // Toon volgende
+                }
+            }, 3000); // 3 seconden
+        }
+
+        /**
+         * Genereert meerdere afbeeldingen voor een carousel.
+         */
+        async function generateCarouselImages(prompts, containerId, spinnerId) {
+            const container = document.getElementById(containerId);
+            const spinner = document.getElementById(spinnerId);
+            if (!container || !spinner) return;
+
+            // Maak een array van promises
+            const imagePromises = prompts.map(prompt => fetchImage(prompt));
+
+            // Wacht tot alle promises zijn afgehandeld
+            const results = await Promise.allSettled(imagePromises);
+
+            let hasSuccessfulImages = false;
+            results.forEach((result, index) => {
+                if (result.status === 'fulfilled') {
+                    hasSuccessfulImages = true;
+                    const img = document.createElement('img');
+                    img.src = result.value;
+                    img.alt = `AI-generated image for ${containerId} (${index + 1})`;
+                    // Belangrijke Tailwind classes voor de carousel
+                    img.className = 'carousel-slide absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0';
+                    container.appendChild(img);
+                } else {
+                    console.error(`Kon afbeelding ${index + 1} voor ${containerId} niet laden:`, result.reason);
+                }
+            });
+
+            // Verberg spinner
+            spinner.classList.add('hidden');
+
+            if (hasSuccessfulImages) {
+                startCarousel(containerId); // Start de carousel
+            } else {
+                // Toon een foutmelding als *niets* is gelukt
+                container.innerHTML = `<div class="flex items-center justify-center w-full h-full text-red-400 text-sm p-4">Afbeeldingen laden mislukt</div>`;
+            }
+        }
+
+
+        /**
+         * Definieert de prompts en start alle carousels.
+         */
+        function generateAllImages() {
+            // DEMA Prompts
+            const demaPrompts = [
+                "Een schone, moderne productfoto van industriële pompen, blauwe kunststof leidingen en glimmende metalen kleppen, netjes gerangschikt op een lichtgrijze achtergrond.",
+                "Een gedetailleerde close-up van een grote, zware industriële slang met een complexe metalen koppeling.",
+                "Een magazijngang gevuld met georganiseerde schappen met kleurrijke kunststof buizen en fittingen."
+            ];
+            generateCarouselImages(demaPrompts, "dema-carousel-container", "dema-spinner");
+
+            // FLUXER Prompts
+            const fluxerPrompts = [
+                "Een gedetailleerde close-up van een complex industrieel instrumentenpaneel met gloeiende blauwe lichten, roestvrijstalen kleppen en manometers.",
+                "Een hightech industriële procespomp, gemaakt van gepolijst roestvrij staal, in een schone fabrieksomgeving.",
+                "Een ingewikkelde reeks geautomatiseerde industriële regelkleppen op een serie leidingen."
+            ];
+            generateCarouselImages(fluxerPrompts, "fluxer-carousel-container", "fluxer-spinner");
+            
+            // BELTZ Prompts
+            const beltzPrompts = [
+                "Een dynamische, groothoekopname van een strak, modern industrieel transportbandsysteem in beweging, dat pakketten vervoert in een schone, lichte fabrieksomgeving.",
+                "Een close-upfoto van de textuur van een zwarte rubberen transportband en de precisie metalen rollen waarover deze loopt.",
+                "Een servicemonteur in professionele kleding die onderhoud uitvoert aan een complex transportbandsysteem in een grote faciliteit."
+            ];
+            generateCarouselImages(beltzPrompts, "beltz-carousel-container", "beltz-spinner");
+            
+            // DE VISSCHERE Prompts
+            const visscherePrompts = [
+                "Een professionele foto van een groot, op maat gebouwd waterfiltratie- en pompstation voor de landbouw.",
+                "Een hightech landbouwirrigatiesysteem, zoals een center pivot, dat water sproeit over een weelderig groen veld bij zonsopgang.",
+                "Een team van technici dat waterleidingen met een grote diameter installeert voor een op maat gemaakt irrigatieproject in een veld."
+            ];
+            generateCarouselImages(visscherePrompts, "visschere-carousel-container", "visschere-spinner");
+        }
+
+        // Start alles wanneer de DOM geladen is
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeLanguage();
+            generateAllImages();
+        });
+
+    </script>
+</body>
+</html>
+

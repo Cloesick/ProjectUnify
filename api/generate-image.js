@@ -1,5 +1,5 @@
 export const config = {
-  runtime: 'nodejs',
+  runtime: 'nodejs', // Correct modern value
 };
 
 export default async function handler(req, res) {

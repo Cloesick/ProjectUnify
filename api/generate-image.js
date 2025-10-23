@@ -1,13 +1,14 @@
 export const config = {
-  runtime: 'edge',
+  runtime: 'nodejs18.x',
 };
 
-export default async function handler(req) {
+export default async function handler(req, res) {
   try {
-    const { prompt } = await req.json();
+    const body = req.body || (await new Response(req.body).json());
+    const { prompt } = body || {};
 
     if (!process.env.GEMINI_API_KEY) {
-      throw new Error("Missing GEMINI_API_KEY environment variable");
+      return res.status(500).json({ error: "Missing GEMINI_API_KEY" });
     }
 
     const response = await fetch(
@@ -19,7 +20,7 @@ export default async function handler(req) {
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: `Generate a photo of ${prompt}` }],
+              parts: [{ text: `Generate a realistic photo of ${prompt}` }],
             },
           ],
         }),
@@ -28,15 +29,9 @@ export default async function handler(req) {
 
     const data = await response.json();
 
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    res.status(200).json(data);
   } catch (err) {
     console.error("Handler error:", err);
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    res.status(500).json({ error: err.message });
   }
 }

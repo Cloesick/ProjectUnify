@@ -1,11 +1,9 @@
-export const config = {
-  runtime: 'edge',
-};
+export const config = { runtime: "edge" };
 
-// Handle CORS preflight
+// Handle preflight CORS
 export async function OPTIONS() {
   return new Response(null, {
-    status: 200,
+    status: 204,
     headers: corsHeaders(),
   });
 }
@@ -21,7 +19,7 @@ export async function POST(req) {
       });
     }
 
-    // 🔑 Use your OpenAI API securely
+    // Example using OpenAI API
     const response = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: {
@@ -41,7 +39,6 @@ export async function POST(req) {
       status: 200,
       headers: corsHeaders(),
     });
-
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
@@ -52,7 +49,7 @@ export async function POST(req) {
 
 function corsHeaders() {
   return {
-    "Access-Control-Allow-Origin": "https://cloesick.github.io", // 👈 Allow your GitHub Pages site
+    "Access-Control-Allow-Origin": "https://cloesick.github.io",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json",
